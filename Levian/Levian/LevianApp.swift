@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct LevianApp: App {
+    
+    @AppStorage("isOnboardingComplete") private var isOnboardingComplete: Bool = false
+    
     var body: some Scene {
         WindowGroup {
-            OnboardingView()
+            if isOnboardingComplete {
+                MainView()
+            } else {
+                OnboardingView()
+            }
         }
     }
 }

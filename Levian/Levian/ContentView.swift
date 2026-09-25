@@ -13,6 +13,8 @@ struct OnboardingView: View {
     @State private var starterWeight: String = ""
     @State private var storageType: String = "Counter"
     
+    @AppStorage("isOnboardingComplete") private var isOnboardingComplete: Bool = false
+    
     var body: some View {
         ZStack {
             Color("primaryBackground")
@@ -47,7 +49,7 @@ struct OnboardingView: View {
                 }
                 .pickerStyle(.segmented)
                 Button(action: {
-                    // continue action
+                    isOnboardingComplete = true
                 }) {
                     Text("Continue")
                         .fontWeight(.semibold)
