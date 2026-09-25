@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    @State private var showSettings: Bool = false
+    
     var body: some View {
         ZStack {
             Color("primaryBackground")
@@ -42,7 +45,7 @@ struct MainView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        // settings action
+                        showSettings = true
                     }) {
                         Image(systemName: "gearshape.fill")
                             .foregroundColor(Color("primaryText"))
@@ -51,6 +54,9 @@ struct MainView: View {
                     .padding()
                 }
                 Spacer()
+            }
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
             }
         }
     }
