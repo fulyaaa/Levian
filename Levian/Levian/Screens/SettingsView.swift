@@ -9,9 +9,6 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @State private var starterName: String = ""
-    @State private var starterWeight: String = ""
-    @State private var storageType: String = "Counter"
     @State private var reminderInterval: String = "24"
     @EnvironmentObject var viewModel: StarterViewModel
     
@@ -20,21 +17,21 @@ struct SettingsView: View {
           Color("primaryBackground")
                 .ignoresSafeArea()
             VStack(spacing: 20){
-                TextField("Starter Name", text: $starterName)
+                TextField("Starter Name", text: $viewModel.starterName)
                     .padding()
                     .background(Color("accent").opacity(0.2))
                     .cornerRadius(16)
                     .foregroundColor(Color("primaryText"))
                     .padding(.bottom, 8)
                 
-                TextField("Starter Weight (g)", text: $starterWeight)
+                TextField("Starter Weight (g)", text: $viewModel.starterWeight)
                     .padding()
                     .background(Color("accent").opacity(0.2))
                     .cornerRadius(16)
                     .foregroundColor(Color("primaryText"))
                     .keyboardType(.numberPad)
                 
-                Picker("Storage", selection: $storageType) {
+                Picker("Storage", selection: $viewModel.storageType) {
                     Text("Counter").tag("Counter")
                     Text("Fridge").tag("Fridge")
                 }
