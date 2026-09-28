@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     
     @State private var showSettings: Bool = false
+    @EnvironmentObject var viewModel: StarterViewModel
     
     var body: some View {
         ZStack {

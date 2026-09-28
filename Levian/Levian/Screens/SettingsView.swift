@@ -13,6 +13,7 @@ struct SettingsView: View {
     @State private var starterWeight: String = ""
     @State private var storageType: String = "Counter"
     @State private var reminderInterval: String = "24"
+    @EnvironmentObject var viewModel: StarterViewModel
     
     var body: some View {
         ZStack {

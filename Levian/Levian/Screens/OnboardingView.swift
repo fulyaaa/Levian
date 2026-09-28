@@ -9,9 +9,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     
-    @State private var starterName: String = ""
-    @State private var starterWeight: String = ""
-    @State private var storageType: String = "Counter"
+    @EnvironmentObject var viewModel: StarterViewModel
     
     @AppStorage("isOnboardingComplete") private var isOnboardingComplete: Bool = false
     
@@ -29,21 +27,21 @@ struct OnboardingView: View {
                     .font(.subheadline)
                     .foregroundColor(Color("primaryText").opacity(0.7))
                 
-                TextField("Starter Name", text: $starterName)
+                TextField("Starter Name", text: $viewModel.starterName)
                     .padding()
                     .background(Color("accent").opacity(0.2))
                     .cornerRadius(16)
                     .foregroundColor(Color("primaryText"))
                     .padding(.bottom, 8)
                 
-                TextField("Starter Weight (g)", text: $starterWeight)
+                TextField("Starter Weight (g)", text: $viewModel.starterWeight)
                     .padding()
                     .background(Color("accent").opacity(0.2))
                     .cornerRadius(16)
                     .foregroundColor(Color("primaryText"))
                     .keyboardType(.numberPad)
                 
-                Picker("Storage", selection: $storageType) {
+                Picker("Storage", selection: $viewModel.storageType) {
                     Text("Counter").tag("Counter")
                     Text("Fridge").tag("Fridge")
                 }
