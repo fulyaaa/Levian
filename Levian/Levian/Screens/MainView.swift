@@ -17,22 +17,30 @@ struct MainView: View {
             Color("primaryBackground")
                 .ignoresSafeArea()
             VStack(spacing: 24){
-                Text("Levian")
+                Text(viewModel.starterName.isEmpty ? "Levian" : viewModel.starterName)
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(Color("primaryText"))
-                Text("Day 1")
+                Text("Day \(Calendar.current.dateComponents([.day], from: viewModel.startDate, to: Date()).day ?? 1)")
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(Color("primaryText"))
-                Text("Last fed: Today at 12:00")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color("primaryText"))
+                if let date = viewModel.lastFedDate {
+                    Text("Last fed: \(date.formatted(.dateTime.hour().minute()))")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("primaryText"))
+                } else {
+                    Text("Not fed yet")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color("primaryText"))
+                }
+                    
                 Button(action: {
-                    // fedding action
+                    viewModel.lastFedDate = Date()
                 }) {
-                    Text("I Fed Levian! 🍞")
+                    Text(viewModel.starterName.isEmpty ? "I Fed Levian! 🍞" : "I Fed \(viewModel.starterName)! 🍞")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(Color("primaryText"))
@@ -65,4 +73,5 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .environmentObject(StarterViewModel())
 }
