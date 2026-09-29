@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct MainView: View {
     
@@ -66,6 +67,11 @@ struct MainView: View {
             }
             .sheet(isPresented: $showSettings) {
                 SettingsView()
+            }
+        }
+        .onAppear {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                print("Notification permission: \(granted)")
             }
         }
     }

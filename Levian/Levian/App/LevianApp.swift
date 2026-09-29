@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 @main
 struct LevianApp: App {
@@ -23,5 +24,6 @@ struct LevianApp: App {
                     .environmentObject(viewModel)
             }
         }
+        
     }
 }
