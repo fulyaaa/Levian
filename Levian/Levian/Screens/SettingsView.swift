@@ -11,6 +11,7 @@ struct SettingsView: View {
     
     @State private var reminderInterval: String = "24"
     @EnvironmentObject var viewModel: StarterViewModel
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         ZStack {
@@ -45,7 +46,7 @@ struct SettingsView: View {
                     .keyboardType(.numberPad)
                 
                 Button(action: {
-                    // save action
+                    dismiss()
                 }) {
                     Text("Save")
                         .fontWeight(.semibold)
