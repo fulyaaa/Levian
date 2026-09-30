@@ -40,6 +40,7 @@ struct MainView: View {
                     
                 Button(action: {
                     viewModel.lastFedDate = Date()
+                    viewModel.scheduleNotification()
                 }) {
                     Text(viewModel.starterName.isEmpty ? "I Fed Levian! 🍞" : "I Fed \(viewModel.starterName)! 🍞")
                         .font(.largeTitle)

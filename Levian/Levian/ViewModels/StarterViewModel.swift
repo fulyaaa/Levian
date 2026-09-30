@@ -6,6 +6,7 @@
 //
 import Foundation
 import Combine
+import UserNotifications
 
 class StarterViewModel: ObservableObject {
     
@@ -41,10 +42,25 @@ class StarterViewModel: ObservableObject {
         }
     }
     
-    @Published var reminderInterval: String = "24" {
+    @Published var reminderInterval: String = "168" {
         didSet {
             UserDefaults.standard.set(reminderInterval, forKey: "reminderInterval")
         }
+    }
+    func scheduleNotification() {
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Time to feed \(starterName.isEmpty ? "Levian" : starterName)! 🍞"
+        content.sound = .default
+        
+        let hours = Double(reminderInterval) ?? 168
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3600*hours, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: "feedReminder", content: content, trigger: trigger)
+        center.add(request)
+        
     }
     
     init() {
@@ -53,7 +69,7 @@ class StarterViewModel: ObservableObject {
         self.storageType = UserDefaults.standard.string(forKey: "storageType") ?? ""
         self.lastFedDate = UserDefaults.standard.object(forKey: "lastFedDate") as? Date
         self.startDate = UserDefaults.standard.object(forKey: "startDate") as? Date ?? Date()
-        self.reminderInterval = UserDefaults.standard.string(forKey: "reminderInterval") ?? "24"
+        self.reminderInterval = UserDefaults.standard.string(forKey: "reminderInterval") ?? "168"
     }
 
     
