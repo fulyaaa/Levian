@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @State private var reminderInterval: String = "24"
     @EnvironmentObject var viewModel: StarterViewModel
     @Environment(\.dismiss) var dismiss
     
@@ -38,7 +37,7 @@ struct SettingsView: View {
                 }
                 .pickerStyle(.segmented)
                 
-                TextField("Reminder every (hours)", text: $reminderInterval)
+                TextField("Reminder every (hours)", text: $viewModel.reminderInterval)
                     .padding()
                     .background(Color("accent").opacity(0.2))
                     .cornerRadius(16)
