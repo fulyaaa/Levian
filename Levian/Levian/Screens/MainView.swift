@@ -22,6 +22,9 @@ struct MainView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(Color("primaryText"))
+                LottieView(fileName: "blob")
+                    .frame(width: 220, height: 220)
+                
                 Text("Day \(Calendar.current.dateComponents([.day], from: viewModel.startDate, to: Date()).day ?? 1)")
                     .font(.title3)
                     .fontWeight(.bold)
