@@ -22,8 +22,32 @@ struct MainView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(Color("primaryText"))
-                LottieView(fileName: "blob")
-                    .frame(width: 220, height: 220)
+                ZStack {
+                    LottieView(fileName: "blob")
+                        .frame(width: 220, height: 220)
+                    
+    
+                    HStack(spacing: 30) {
+                        Circle()
+                            .fill(Color("primaryText"))
+                            .frame(width: 18, height: 18)
+                        Circle()
+                            .fill(Color("primaryText"))
+                            .frame(width: 18, height: 18)
+                    }
+                    .offset(y: -20)
+                    
+                    Path { path in
+                        path.move(to: CGPoint(x: 0, y: 0))
+                        path.addQuadCurve(
+                            to: CGPoint(x: 40, y: 0),
+                            control: CGPoint(x: 20, y: 12)
+                        )
+                    }
+                    .stroke(Color("primaryText"), lineWidth: 4)
+                    .frame(width: 40, height: 12)
+                    .offset(y: 15)
+                }
                 
                 Text("Day \(Calendar.current.dateComponents([.day], from: viewModel.startDate, to: Date()).day ?? 1)")
                     .font(.title3)
