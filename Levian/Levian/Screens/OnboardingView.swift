@@ -52,7 +52,7 @@ struct OnboardingView: View {
                     .font(.subheadline)
                     .foregroundColor(Color("primaryText").opacity(0.7))
                 
-                TextField("Starter name or Levian", text: $viewModel.starterName)
+                TextField("Starter name or use Levian", text: $viewModel.starterName)
                     .padding()
                     .background(Color("accent").opacity(0.2))
                     .cornerRadius(16)
