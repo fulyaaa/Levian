@@ -49,7 +49,7 @@ struct MainView: View {
                     .offset(y: 15)
                 }
                 
-                Text("Day \(Calendar.current.dateComponents([.day], from: viewModel.startDate, to: Date()).day ?? 1)")
+                Text("Day \(Calendar.current.dateComponents([.day], from: viewModel.startDate, to: Date()).day ?? 0) + 1")
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(Color("primaryText"))

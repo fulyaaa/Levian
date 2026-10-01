@@ -72,6 +72,7 @@ struct OnboardingView: View {
                 }
                 .pickerStyle(.segmented)
                 Button(action: {
+                    viewModel.startDate = Date()
                     isOnboardingComplete = true
                 }) {
                     Text("Continue")
