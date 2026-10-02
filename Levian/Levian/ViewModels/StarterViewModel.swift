@@ -57,10 +57,19 @@ class StarterViewModel: ObservableObject {
         
         let hours = Double(reminderInterval) ?? 168
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3600*hours, repeats: true)
-        
+
         let request = UNNotificationRequest(identifier: "feedReminder", content: content, trigger: trigger)
         center.add(request)
-        
+    }
+    
+    var lastFedText: String {
+        guard let date = lastFedDate else { return "not fed yet" }
+        let interval = Date().timeIntervalSince(date)
+        let hours = Int(interval / 3600)
+        let minutes = Int(interval / 60) % 60
+        if hours == 0 { return "\(minutes) min ago" }
+        if hours < 24 { return "\(hours)h ago" }
+        return "\(hours / 24)d ago"
     }
     
     init() {
