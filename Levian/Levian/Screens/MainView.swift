@@ -54,7 +54,7 @@ struct MainView: View {
                     .fontWeight(.bold)
                     .foregroundColor(Color("primaryText"))
                 if let date = viewModel.lastFedDate {
-                    Text("Last fed: \(date.formatted(.dateTime.hour().minute()))")
+                    Text("Last fed: \(viewModel.lastFedText)")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(Color("primaryText"))
