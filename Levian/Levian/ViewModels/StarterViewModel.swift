@@ -80,6 +80,13 @@ class StarterViewModel: ObservableObject {
         return "\(hours / 24)d ago"
     }
     
+    func logFeeding() {
+        let now = Date()
+        lastFedDate = now
+        feedingHistory.insert(now, at: 0)
+        scheduleNotification()
+    }
+    
     init() {
         self.starterName = UserDefaults.standard.string(forKey: "starterName") ?? ""
         self.starterWeight = UserDefaults.standard.string(forKey: "starterWeight") ?? ""
