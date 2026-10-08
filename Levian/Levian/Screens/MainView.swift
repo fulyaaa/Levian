@@ -53,7 +53,7 @@ struct MainView: View {
                     .font(.title3)
                     .fontWeight(.bold)
                     .foregroundColor(Color("primaryText"))
-                if let date = viewModel.lastFedDate {
+                if viewModel.lastFedDate != nil {
                     Text("Last fed: \(viewModel.lastFedText)")
                         .font(.title3)
                         .fontWeight(.bold)
@@ -66,8 +66,7 @@ struct MainView: View {
                 }
                     
                 Button(action: {
-                    viewModel.lastFedDate = Date()
-                    viewModel.scheduleNotification()
+                    viewModel.logFeeding()
                 }) {
                     Text(viewModel.starterName.isEmpty ? "I Fed Levian! 🍞" : "I Fed \(viewModel.starterName)! 🍞")
                         .font(.largeTitle)
@@ -79,6 +78,30 @@ struct MainView: View {
                         .clipShape(Capsule())
                 }
             }
+            
+            if !viewModel.feedingHistory.isEmpty {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Feeding History")
+                        .font(.caption)
+                        .foregroundColor(Color("primaryText").opacity(0.6))
+                    
+                    ForEach(viewModel.feedingHistory.prefix(5), id: \.self) { date in
+                        HStack {
+                            Text("🍞")
+                            Text(date.formatted(.dateTime.month().day().hour().minute()))
+                                .font(.caption)
+                                .foregroundColor(Color("primaryText"))
+                            Spacer()
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(Color("accent").opacity(0.15))
+                        .cornerRadius(10)
+                    }
+                }
+                .padding(.horizontal)
+            }
+            
             VStack {
                 HStack {
                     Spacer()

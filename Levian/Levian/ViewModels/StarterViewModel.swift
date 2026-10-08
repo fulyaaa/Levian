@@ -94,6 +94,11 @@ class StarterViewModel: ObservableObject {
         self.lastFedDate = UserDefaults.standard.object(forKey: "lastFedDate") as? Date
         self.startDate = UserDefaults.standard.object(forKey: "startDate") as? Date ?? Date()
         self.reminderInterval = UserDefaults.standard.string(forKey: "reminderInterval") ?? "168"
+        
+        if let timestamps = UserDefaults.standard.array(forKey: "feedingHistory") as? [Double] {
+            self.feedingHistory = timestamps.map { Date(timeIntervalSince1970: $0)
+            }
+        }
     }
 
     
