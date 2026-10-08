@@ -47,6 +47,14 @@ class StarterViewModel: ObservableObject {
             UserDefaults.standard.set(reminderInterval, forKey: "reminderInterval")
         }
     }
+    
+    @Published var feedingHistory: [Date] = [] {
+        didSet {
+            let timestamps = feedingHistory.map { $0.timeIntervalSince1970 }
+            UserDefaults.standard.set(timestamps, forKey: "feedingHistory")
+        }
+    }
+    
     func scheduleNotification() {
         let center = UNUserNotificationCenter.current()
         center.removeAllPendingNotificationRequests()
